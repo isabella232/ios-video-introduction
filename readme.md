@@ -1,5 +1,5 @@
 # Video calling with sinch
-Today we are introducing Video calling as public beta for iOS/Android and JS, as usual we have focused on how to make it a easy as possible to make a video call. Infact in this beta its just like make a call with sinch client. If you want to learn how to set up that from scratch you can look [here](https://www.sinch.com/tutorials/ios-simple-voice-app-tutorial/)
+Today we are introducing Video calling as public beta for iOS/Android and JS, as usual we have focused on how to make it a easy as possible to make a video call. In fact it's just like making a call with the sinch client. If you want to learn how to set it up from scratch you can look [here](https://www.sinch.com/tutorials/ios-simple-voice-app-tutorial/)
 
 ![](images/screenshot.png)
 
@@ -31,8 +31,8 @@ The first thing you will notice is
   return [[(AppDelegate *)[[UIApplication sharedApplication] delegate] client] videoController];
 }
 ```
-This takes care of all the Video stuff for you, like disabling the idle timer so the screen does not go blank, providing you with a view of your self and the remote stream. 
-The next thing that is different is you have two views as IBOutlets where we will show the video. 
+This takes care of all the Video stuff for you, like disabling the idle timer so the screen doesn't go blank, providing you with a view of yourself and the remote stream. 
+The next difference is that you have two views as IBOutlets where we will show the video. 
 
 
 ```
@@ -71,7 +71,7 @@ The next thing that is different is you have two views as IBOutlets where we wil
 
 ```
 
-As soon as you load this view the localStream is added to the view, this is important because you want to make sure you look you best when the other party picks up. There is also a gestureRecognizer to enable you to switch to full screen, and one to toggle front or back facing camera.
+As soon as you load this view the localStream is added to the view, this is important because you want to make sure you look your best when the other party picks up. There is also a gestureRecognizer to enable you to switch to full screen, and one to toggle front or back facing camera.
 
 The next key part in the call is
 
