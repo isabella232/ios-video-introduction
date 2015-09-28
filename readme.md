@@ -8,7 +8,7 @@ On the mission of helping you guys become the Uber of X, we're now introducing V
 
 ![](images/screenshot.png)
 
-Today, we're going to look at what makes a video call different from regular voice calling. Lets dive in to the code from the sample app we ship with the [SDK](https://www.sinch.com/downloads/#videosdk).
+We're going to look at what makes a video call different from regular voice calling. Let's dive in to the code from the sample app we ship with the [SDK](https://www.sinch.com/downloads/#videosdk).
 
 It's worth noting that the beta is **not** available via cocoa pods, so if you want to add the beta to an existing project, you need to do it old school by hand and add the required frameworks. Also, the Sinch service we provide is not supported yet. Check out the [documentation](https://www.sinch.com/docs/video/ios/) to see the exact things to add!
 
