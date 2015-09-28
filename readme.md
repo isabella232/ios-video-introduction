@@ -1,11 +1,19 @@
-# Video calling with sinch
-Today we are introducing Video calling as public beta for iOS/Android and JS, as usual we have focused on how to make it a easy as possible to make a video call. In fact it's just like making a call with the sinch client. If you want to learn how to set it up from scratch you can look [here](https://www.sinch.com/tutorials/ios-simple-voice-app-tutorial/)
+# Building an iOS Video Calling App
+![](images/selfie.png)
+## Get rich or code tryin
+[Mobile is where WebRTC will make the most impact] (http://www.programmableweb.com/news/webrtc-2015-and-why-apple-will-never-join-party/analysis/2015/08/13). Apps like Facebook Messenger, Slack and WhatsApp have already integrated WebRTC into mobile, and accordingly, [research show] (http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/) that app usage dominates mobile data consumption completely (with 89%). The rise of WebRTC will allow for richer communication - and that is where video comes in.
+
+
+On the mission of helping you guys become the Uber of X, we're now introducing Video Calling as Public Beta for iOS/Android and JS. As usual, we have focused on how to make it as easy as possible to make a video call. In fact, it's just like making a voice call with the Sinch client. If you want to learn how to set it up from scratch you can look [here](https://www.sinch.com/tutorials/ios-simple-voice-app-tutorial/).
 
 ![](images/screenshot.png)
 
-Today we are going to look at what makes a video call different from the regular calling. The obvious reason is of course the video. Lets dive in to the code from the sample app we ship with the [SDK](https://www.sinch.com/downloads/#videosdk). Its worth noting that the beta is **not** available via cocoa pods, so if you want to add the beta to an existing project you need to do it old school by hand and add the required frameworks, also the sinchservice we provide is not supported either right now. Check out the [documentation](https://www.sinch.com/docs/video/ios/) to see the exact things to add.
+Today, we're going to look at what makes a video call different from regular voice calling. Lets dive in to the code from the sample app we ship with the [SDK](https://www.sinch.com/downloads/#videosdk).
 
-Open up the SinchVideo located in the samples directory, and when you look around its the same setup as usual with our Voice calling. Open up the **appDelegate.m** and and add your key and secret in:
+*It's worth noting that the beta is **not** available via cocoa pods, so if you want to add the beta to an existing project, you need to do it old school by hand and add the required frameworks. Also, the Sinch service we provide is not supported yet. Check out the [documentation](https://www.sinch.com/docs/video/ios/) to see the exact things to add!*
+
+## Setup
+Open up the SinchVideo located in the samples directory. When you look around, it's the same setup as with our Voice calling. Open up the **appDelegate.m** and add your key/secret in:
 
 ```
 - (void)initSinchClientWithUserId:(NSString *)userId {
@@ -23,15 +31,16 @@ Open up the SinchVideo located in the samples directory, and when you look aroun
 }
 ```
 
-until you look in **CallViewController.m** 
-The first thing you will notice is 
+Until you look in **CallViewController.m**, the first thing you will notice is:
 
 ```
 - (id<SINVideoController>)videoController {
   return [[(AppDelegate *)[[UIApplication sharedApplication] delegate] client] videoController];
 }
 ```
-This takes care of all the Video stuff for you, like disabling the idle timer so the screen doesn't go blank, providing you with a view of yourself and the remote stream. 
+This takes care of all the Video stuff for you, like disabling the idle timer so the screen doesn't go blank, or providing you with a view of yourself and the remote stream. 
+
+## Two views
 The next difference is that you have two views as IBOutlets where we will show the video. 
 
 
@@ -71,9 +80,12 @@ The next difference is that you have two views as IBOutlets where we will show t
 
 ```
 
-As soon as you load this view the localStream is added to the view, this is important because you want to make sure you look your best when the other party picks up. There is also a gestureRecognizer to enable you to switch to full screen, and one to toggle front or back facing camera.
+As soon as you load this view, the localStream is added to it. This is important because you want to make sure you look your best when the other party picks up.
 
-The next key part in the call is
+There is also a gestureRecognizer to enable you to switch to full screen, and one to toggle front or back facing camera.
+
+## Remote video
+The next key part in the call is this:
 
 ```
 - (void)callDidAddVideoTrack:(id<SINCall>)call {
@@ -81,9 +93,9 @@ The next key part in the call is
 }
 ```
 
-This is where we add the remote video to the stream to the view. And that folks is really all there is to it to enable group calling. 
+This is where we add remote video to the view.
 
-Download the sdk and give it a spin :)
+That's really all there is to it. Download the SDK and give it a spin! Fingers crossed, you'll get rich tryin.
 
 
 
