@@ -1,7 +1,6 @@
 # Building an iOS Video Calling App
-![](images/selfie.png)
-## Get rich or code tryin
-[Mobile is where WebRTC will make the most impact] (http://www.programmableweb.com/news/webrtc-2015-and-why-apple-will-never-join-party/analysis/2015/08/13). Apps like Facebook Messenger, Slack and WhatsApp have already integrated WebRTC into mobile, and accordingly, [research shows] (http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/) that app usage dominates mobile data consumption completely (with 89%). The rise of WebRTC will allow for richer communication - and that is where video comes in.
+
+[Mobile is where WebRTC will make the most impact] (http://www.programmableweb.com/news/webrtc-2015-and-why-apple-will-never-join-party/analysis/2015/08/13). Apps like Facebook Messenger, Slack and WhatsApp have already integrated WebRTC into mobile, and accordingly, [research shows] (http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/) that app usage dominates mobile data consumption completely (with 89%). The rise of [WebRTC communications](https://www.sinch.com/products/webrtc/) will allow for richer communication - and that is where video comes in.
 
 
 On the mission of helping you guys become the Uber of X, we're now introducing Video Calling as Public Beta for iOS/Android and JS. As usual, we have focused on how to make it as easy as possible to make a video call. In fact, it's just like making a voice call with the Sinch client. If you want to learn how to set it up from scratch you can look [here](https://www.sinch.com/tutorials/ios-simple-voice-app-tutorial/).
