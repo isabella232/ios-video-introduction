@@ -1,4 +1,10 @@
 # Building an iOS Video Calling App
+<hr/>
+**Update for Beta 2**
+
+Now supports push and voice calling and video calling in the same SDK
+<hr/>
+
 
 [Mobile is where WebRTC will make the most impact] (http://www.programmableweb.com/news/webrtc-2015-and-why-apple-will-never-join-party/analysis/2015/08/13). Apps like Facebook Messenger, Slack and WhatsApp have already integrated WebRTC into mobile, and accordingly, [research shows] (http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/) that app usage dominates mobile data consumption completely (with 89%). The rise of [WebRTC communications](https://www.sinch.com/products/webrtc/) will allow for richer communication - and that is where video comes in.
 
@@ -29,15 +35,28 @@ Open up the SinchVideo located in the samples directory. When you look around, i
   }
 }
 ```
+In this sample we also use the active connections in the background, if you would like to use push there is also a Sample project with that to.
+## New method for calling with Video
+Those of of you that tired out our first beta know that you just called and there was video. in this new beta we added new method ```[callClient callUserVideoWithId:self.destination.text];``` for calling with Video, that means that now you can call both voice and video with the same SDK. You will find that code in 
+**MainViewController.m**
+```objectivec
+- (IBAction)call:(id)sender {
+  if ([self.destination.text length] > 0 && [self.client isStarted]) {
+    id<SINCall> call = [self.client.callClient callUserVideoWithId:self.destination.text];
+    [self performSegueWithIdentifier:@"callView" sender:call];
+  }
+}
+```
 
-Until you look in **CallViewController.m**, the first thing you will notice is:
+Next difference you will spot is in **CallViewController.m**, the first thing you will notice is:
 
 ```
 - (id<SINVideoController>)videoController {
   return [[(AppDelegate *)[[UIApplication sharedApplication] delegate] client] videoController];
 }
 ```
-This takes care of all the Video stuff for you, like disabling the idle timer so the screen doesn't go blank, or providing you with a view of yourself and the remote stream. 
+This takes care of all the Video stuff for you, like disabling the idle timer so the screen doesn't go blank, or providing you with a view of yourself and the remote stream. It also have some fancy gestureRecognizers to switch cameras and go in and out of fullscreen with are super neat. 
+
 
 ## Two views
 The next difference is that you have two views as IBOutlets where we will show the video. 
@@ -94,7 +113,7 @@ The next key part in the call is this:
 
 This is where we add remote video to the view.
 
-That's really all there is to it. Download the SDK and give it a spin! Fingers crossed, you'll get rich tryin.
+That's really all there is to it. Download the SDK and give it a spin!
 
 
 
