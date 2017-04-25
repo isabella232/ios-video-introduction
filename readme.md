@@ -2,23 +2,25 @@
 <hr/>
 **Update for Beta 2**
 
-Now supports push and voice calling and video calling in the same SDK
+The new Sinch iOS SDK now supports push and voice calling and video calling in the same SDK. 
+
+This tutorial assumes you've already signed up for a Sinch account and have an application key and secret ready to use. If you don't, you can easily go ahead and follow the steps at the [Sinch website](https://www.sinch.com/).
 <hr/>
 
 
-[Mobile is where WebRTC will make the most impact] (http://www.programmableweb.com/news/webrtc-2015-and-why-apple-will-never-join-party/analysis/2015/08/13). Apps like Facebook Messenger, Slack and WhatsApp have already integrated WebRTC into mobile, and accordingly, [research shows] (http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/) that app usage dominates mobile data consumption completely (with 89%). The rise of [WebRTC communications](https://www.sinch.com/products/webrtc/) will allow for richer communication - and that is where video comes in.
+[WebRTC is on its way to being one of the most influential technologies in the mobile space] (http://www.programmableweb.com/news/webrtc-2015-and-why-apple-will-never-join-party/analysis/2015/08/13). Facebook Messenger, Slack and WhatsApp have already integrated WebRTC into their mobile apps to make this technology mainstream. [Research shows] (http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/) that native mobile apps consume 89% of all mobile data. The rise of [WebRTC communications](https://www.sinch.com/products/webrtc/) has enabled another level of communication, with video being the centrepiece allowing users to seamelessly video-chat in any mobile app.
 
 
-On the mission of helping you guys become the Uber of X, we're now introducing Video Calling as Public Beta for iOS/Android and JS. As usual, we have focused on how to make it as easy as possible to make a video call. In fact, it's just like making a voice call with the Sinch client. If you want to learn how to set it up from scratch you can look [here](https://www.sinch.com/tutorials/ios-simple-voice-app-tutorial/).
+At Sinch we are on a mission to help developers like you to develop the next 'Uber of X'. To help on our mission we are bringing Video Calling to all our users as a Public Beta, now available on iOS, Android and JS (web). To help you get started with WebRTC we have made this simple getting-started guide specifically for integrating Video technology on iOS. Don't be scared, video calling with Sinch is just as easy as making a voice call. If you're interested you can check out how to make voice calls on iOS [here](https://www.sinch.com/tutorials/ios-simple-voice-app-tutorial/).
 
 ![](images/screenshot.png)
 
-We're going to look at what makes a video call different from regular voice calling. Let's dive in to the code from the sample app we ship with the [SDK](https://www.sinch.com/downloads/#videosdk).
+Firstly we are going to check out what the differences are between making a video call and a voice call with Sinch. A good starting point would be to download the [SDK](https://www.sinch.com/downloads/#videosdk) and check out the example code.
 
-It's worth noting that the beta is **not** available via cocoa pods, so if you want to add the beta to an existing project, you need to do it old school by hand and add the required frameworks. Also, the Sinch service we provide is not supported yet. Check out the [documentation](https://www.sinch.com/docs/video/ios/) to see the exact things to add!
+Unfortunately the beta is currently **not** available via cocoa pods. If you are wanting to add the beta to an existing project, you need to do it old-school way and add the required frameworks. At present the Sinch service is not yet supported. Check out the [documentation](https://www.sinch.com/docs/video/ios/) to see how and what you need to add to get started! **(Don't worry, it isn't hard!)**
 
 ## Setup
-Open up the SinchVideo located in the samples directory. When you look around, it's the same setup as with our Voice calling. Open up the **appDelegate.m** and add your key/secret in:
+Open up the SinchVideo app which is located in the sample directory, which can be found packaged with the SDK. Have a bit of a look around the project, you will notice it's a similar setup as our voice calling app. We do all the same things to initalize the client. Go ahead and open up **appDelegate.m** and fill the appropriate placeholders with your key and secret:
 
 ```
 - (void)initSinchClientWithUserId:(NSString *)userId {
@@ -36,9 +38,17 @@ Open up the SinchVideo located in the samples directory. When you look around, i
 }
 ```
 In this sample we also use the active connections in the background, if you would like to use push there is also a Sample project with that to.
-## New method for calling with Video
-Those of of you that tired out our first beta know that you just called and there was video. in this new beta we added new method ```[callClient callUserVideoWithId:self.destination.text];``` for calling with Video, that means that now you can call both voice and video with the same SDK. You will find that code in 
+
+If you're new to iOS development, appDelegate.m is the home of app setup and initialisation. The appDelegate file is also where you can make changes to your app based on your app's status. The above code simply sets up the Sinch client, you can find your Sinch application key and secret in the Sinch portal. If you don't currently have an account, [sign up here](www.sinch.com), it's free!
+
+## A new method for calling with Video
+If you got the chance to try the first beta SDK you will remember that video calling was a seperate feature. We have gone ahead and consolidated voice and video calling into one SDK. It is now as simple as calling:
+
+```[callClient callUserVideoWithId:self.destination.text];```
+
 **MainViewController.m**
+
+
 ```objectivec
 - (IBAction)call:(id)sender {
   if ([self.destination.text length] > 0 && [self.client isStarted]) {
@@ -48,18 +58,18 @@ Those of of you that tired out our first beta know that you just called and ther
 }
 ```
 
-Next difference you will spot is in **CallViewController.m**, the first thing you will notice is:
+The next difference you will see is in **CallViewController.m**, the first thing you will notice is:
 
 ```
 - (id<SINVideoController>)videoController {
   return [[(AppDelegate *)[[UIApplication sharedApplication] delegate] client] videoController];
 }
 ```
-This takes care of all the Video stuff for you, like disabling the idle timer so the screen doesn't go blank, or providing you with a view of yourself and the remote stream. It also have some fancy gestureRecognizers to switch cameras and go in and out of fullscreen with are super neat. 
+This method takes care of all the necessary video functionality for you, like disabling the idle timer so the screen doesn't go blank, or providing you with a view of yourself and the remote stream. It also has some fancy gesture recognizers built-in to help you switch cameras and go in and out of fullscreen mode. All these built-in features help you build a polished mobile app, without all the hard work.
 
 
 ## Two views
-The next difference is that you have two views as IBOutlets where we will show the video. 
+Within the app we have gone ahead and built in two IBOutlets to display video streams.
 
 
 ```
@@ -100,7 +110,7 @@ The next difference is that you have two views as IBOutlets where we will show t
 
 As soon as you load this view, the localStream is added to it. This is important because you want to make sure you look your best when the other party picks up.
 
-There is also a gestureRecognizer to enable you to switch to full screen, and one to toggle front or back facing camera.
+There is also a gestureRecognizer to enable you to switch to full screen, and one to toggle front or back facing camera. 
 
 ## Remote video
 The next key part in the call is this:
@@ -111,10 +121,18 @@ The next key part in the call is this:
 }
 ```
 
-This is where we add remote video to the view.
+This is where we add the remote video stream to the main view, as a subview, once the video chat has been established.
 
-That's really all there is to it. Download the SDK and give it a spin!
+## Running the app on your device
+If you don't already have an apple developer account, you can go and sign up for one at the [apple developer portal](https://developer.apple.com/). Once you have an account you can login to your account in Xcode. If you are yet to deploy an iOS app from Xcode to your iOS device, you will need to press 'play' in Xcode to run your iOS app and then navigate to 
 
+Settings > General > Device Management > Your Developer Account
+
+on your iOS device. Once there you will be able to allow apps to be deployed and run on your iOS device. 
+
+That's really all there is to it. Download the SDK and give it a spin! 
+
+**Got questions? Just ask!**
 
 
 
